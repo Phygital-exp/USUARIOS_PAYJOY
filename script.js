@@ -5,7 +5,7 @@ let filteredData = [];
 let currentChannel = '';
 
 // URL base de la API
-const API_BASE_URL = 'https://pdvalqueria-production.up.railway.app/api/Alqueria/pdv';
+const API_BASE_URL = 'https://usuariospayjoy-production.up.railway.app/api/PayJoy/users';
 
 // Cargar datos de la API según el canal seleccionado
 async function loadData() {
@@ -47,7 +47,7 @@ async function loadData() {
 // Inicializar Fuse.js para búsqueda rápida
 function initializeFuse() {
     const options = {
-        keys: ['SAP','Codigo PDV','Nombre PDV','Ciudad','Direccion','NOMBRE REGIONAL CLIENTE','CANAL','TIPOLOGIA'],
+        keys: ['NOMBRE','IDENTIFICACION','PDV','CIUDAD','REGIONAL','SUPERVISOR','CUENTA'],
         threshold: 0.3,
     };
     fuse = new Fuse(filteredData, options);
@@ -83,18 +83,18 @@ function renderResults(results) {
         results.forEach(result => {
             output += `
                 <div class="result-item">
-                    <h3>${result['Nombre PDV'] || 'N/A'}</h3>
+                    <h3>${result.NOMBRE || 'N/A'}</h3>
                     <ul>
-                        <li><strong>SAP:</strong> ${result.SAP || 'N/A'}
-                        <i class="material-icons copy-icon" onclick="copyToClipboard('${result.SAP}')">content_copy</i></li>
+                        <li><strong>IDENTIFICACIÓN:</strong> ${result.IDENTIFICACION || 'N/A'}
+                        <i class="material-icons copy-icon" onclick="copyToClipboard('${result.IDENTIFICACION}')">content_copy</i></li>
                     </li>
-                    <li><strong>CÓDIGO PDV:</strong> ${result['Codigo PDV'] || 'N/A'}</li>
-                    <li><strong>NOMBRE PDV:</strong> ${result['Nombre PDV'] || 'N/A'}</li>
-                    <li><strong>CIUDAD:</strong> ${result.Ciudad || 'N/A'}</li>
-                    <li><strong>DIRECCIÓN:</strong> ${result.Direccion || 'N/A'}</li>
-                    <li><strong>REGIONAL:</strong> ${result['NOMBRE REGIONAL CLIENTE'] || 'N/A'}</li>
-                    <li><strong>CANAL:</strong> ${result.CANAL || 'N/A'}</li>
-                    <li><strong>TIPOLOGÍA:</strong> ${result.TIPOLOGIA || 'N/A'}</li>
+                    <li><strong>PDV:</strong> ${result.PDV || 'N/A'}</li>
+                    <li><strong>CIUDAD:</strong> ${result.CIUDAD || 'N/A'}</li>
+                    <li><strong>REGIONAL:</strong> ${result.REGIONAL || 'N/A'}</li>
+                    <li><strong>SUPERVISOR:</strong> ${result.SUPERVISOR || 'N/A'}</li>
+                    <li><strong>TELÉFONO:</strong> ${result.TEL || 'N/A'}</li>
+                    <li><strong>CUENTA:</strong> ${result.CUENTA || 'N/A'}</li>
+                    <li><strong>ESTADO:</strong> ${result.ESTADO || 'N/A'}</li>
                 </div>
             `;
         });
