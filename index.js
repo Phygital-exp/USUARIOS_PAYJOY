@@ -18,7 +18,21 @@ app.get("/api/PayJoy/users", async (req, res) => {
         console.log(`Consultando API: ${apiUrl}`);
 
         const response = await fetch(apiUrl, { headers: AUTH_HEADERS });
-        const data = await response.json();
+        const rawBody = await response.text();
+
+        if (!response.ok) {
+            console.error(`Respuesta no OK (${response.status}) de la API PayJoy users:`, rawBody.slice(0, 500));
+            return res.status(502).json({ error: `La API de origen respondio ${response.status}` });
+        }
+
+        let data;
+        try {
+            data = JSON.parse(rawBody);
+        } catch (parseErr) {
+            console.error("Respuesta no es JSON valido:", rawBody.slice(0, 500));
+            return res.status(502).json({ error: "La API de origen no devolvio JSON valido" });
+        }
+
         res.json(data);
     } catch (err) {
         console.error("Error en el proxy PayJoy users:", err);
