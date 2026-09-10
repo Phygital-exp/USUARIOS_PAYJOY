@@ -11,18 +11,18 @@ const AUTH_HEADERS = {
 
 app.use(cors());
 
-app.get("/api/Alqueria/pdv", async (req, res) => {
+app.get("/api/PayJoy/users", async (req, res) => {
     try {
-        const apiUrl = "https://botai.smartdataautomation.com/api_backend_ai/dinamic-db/report/119/alqueria_pdvs";
-        
+        const apiUrl = "https://botai.smartdataautomation.com/api_backend_ai/dinamic-db/report/119/PayJoyUsers";
+
         console.log(`Consultando API: ${apiUrl}`);
-        
+
         const response = await fetch(apiUrl, { headers: AUTH_HEADERS });
         const data = await response.json();
         res.json(data);
     } catch (err) {
-        console.error("Error en el proxy alqueria PDV:", err);
-        res.status(500).json({ error: "Error al obtener datos de alqueria PDV" });
+        console.error("Error en el proxy PayJoy users:", err);
+        res.status(500).json({ error: "Error al obtener datos de PayJoy users" });
     }
 });
 

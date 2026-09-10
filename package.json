@@ -1,7 +1,7 @@
 {
-  "name": "alqueria-proxy",
+  "name": "payjoy-usuarios-proxy",
   "version": "1.0.0",
-  "description": "Proxy para alqueria",
+  "description": "Proxy para PayJoy usuarios",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
